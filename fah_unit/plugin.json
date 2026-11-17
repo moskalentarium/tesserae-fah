@@ -1,0 +1,51 @@
+{
+  "tesserae_compat": "1.x",
+  "name": "Folding@home, Unit",
+  "version": "0.1.0",
+  "kind": "widget",
+  "description": "The work unit this machine is folding right now: donor and team numbers, a still drawn from the live simulation, and that unit's progress. Needs fah-bridge on the same host as Tesserae.",
+  "icon": "ph-atom",
+  "category": "utility",
+  "locales": ["en"],
+  "supports": { "sizes": ["sm", "md", "lg"] },
+  "cell_options": [
+    {
+      "name": "focus",
+      "type": "select",
+      "label": "Unit",
+      "default": "gpu",
+      "help": "Which running work unit to show. GPU units usually move fastest.",
+      "choices": [
+        { "value": "gpu", "label": "GPU unit" },
+        { "value": "cpu", "label": "CPU unit" },
+        { "value": "auto", "label": "Busiest" }
+      ]
+    },
+    {
+      "name": "show_stats",
+      "type": "boolean",
+      "label": "Donor stats",
+      "default": true,
+      "help": "The donor's place on the team, points and work-unit count."
+    }
+  ],
+  "settings": [
+    {
+      "name": "base_url",
+      "type": "string",
+      "label": "Bridge URL",
+      "default": "http://127.0.0.1:8766",
+      "help": "Address of the fah-bridge container. Leave as-is when it runs on the same host as Tesserae."
+    }
+  ],
+  "render": { "full_bleed": true, "needs_network": true },
+  "requires": ["network:127.0.0.1", "settings:plugin"],
+  "data_schema": {
+    "fields": [
+      { "name": "project", "type": "num", "label": "Project" },
+      { "name": "project_name", "type": "str", "label": "Protein" },
+      { "name": "progress", "type": "num", "label": "Progress" },
+      { "name": "eta", "type": "str", "label": "ETA" }
+    ]
+  }
+}
